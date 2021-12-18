@@ -1,0 +1,15 @@
+#====================================================
+# R5: no specific configuration: interfaces and EIGRP
+#====================================================
+int lo0
+ip address 2.2.2.2 255.255.255.0
+
+int e1/0 
+ip address 10.0.45.5 255.255.255.0
+no shutdown
+
+# Enable eigrp on all interfaces
+
+router eigrp 99
+network 0.0.0.0 255.255.255.255
+no auto-summary
