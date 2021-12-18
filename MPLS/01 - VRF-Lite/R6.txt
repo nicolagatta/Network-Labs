@@ -1,0 +1,14 @@
+#==================================================
+# R6: no specific configuration: interaces and OSPF
+#==================================================
+int lo0
+ip address 2.2.2.2 255.255.255.0
+
+int e1/1 
+ip address 10.0.46.6 255.255.255.0
+no shutdown
+
+# Enable OSPF on all interfaces
+router ospf 1
+network 0.0.0.0 255.255.255.255 area0
+
