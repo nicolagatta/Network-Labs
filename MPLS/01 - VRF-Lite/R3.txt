@@ -1,0 +1,49 @@
+# Define VRFs RED
+vrf definition RED
+vnet tag 100
+address-family ipv4
+
+vrf definition BLUE
+vnet tag 200
+address-family ipv4
+
+# Assign Physical interfaces to VRFs
+int e1/0
+vrf forward RED
+ip address 10.0.13.3 255.255.255.0
+no shutdown
+
+int e1/1
+vrf forward BLUE
+ip address 10.0.23.3 255.255.255.0
+no shutdown
+
+# Next we configure the shared linked to use sub interfaces 
+# This creates the logic separation of the traffic exchanged with R4
+int e0/0
+no shutdown
+
+int e0/0.100
+encapsulation dot1q 100
+vrf forwarding RED
+ip address 10.0.34.3 255.255.255.0
+
+int e0/0.200
+encapsulation dot1q 200
+vrf forwarding BLUE
+ip address 10.0.34.3 255.255.255.0
+
+# Last step is to configure routing protocols
+
+# EIGRP needs to declare the non-vrf AS 99
+router eigrp 99
+
+# Then configure another AS with VRFs association between AS and VRFs
+router eigrp 1
+address-family ipv4 vrf RED autonomous-system 99
+network 0.0.0.0 255.255.255.255
+no auto-summary
+
+# OSPF accept VRF name directly:
+router ospf 1 vrf BLUE
+network 0.0.0.0 255.255.255.255 area 0
