@@ -1,0 +1,14 @@
+#====================================================
+# R1: no specific configuration: interfaces and EIGRP
+#====================================================
+int lo0
+ip address 1.1.1.1 255.255.255.0
+
+int e1/0 
+ip address 10.0.13.1 255.255.255.0
+no shutdown
+
+# Enable eigrp on all interfaces using autonomous system 99
+router eigrp 99
+network 0.0.0.0 255.255.255.255
+no auto-summary
