@@ -6,20 +6,22 @@ no shutdown
 int lo0 
 ip address 2.2.2.2 255.255.255.0
 
-# OSPF accept VRF name directly:
 router ospf 1 
  network 2.2.2.0 0.0.0.255 area 0
  network 10.0.23.0 0.0.0.255 area 0
 
-# NOw the l2tpv3
+# Now the l2tpv3 tunneling
 
+# Define the secret
 l2tp-class R2R3
 digest secret MyPass123 hash SHA1
 
+# Define the tunnel "psedo wire" using loopback0 as tunnel source
 pseudowire-class R2R3
  encapsulation l2tpv3
  ip local interface Loopback0
 
+# Enable the tunnel on incoming interface (where the traffic to be tunnelled comes in)
 int e0/0
 xconnect 3.3.3.3 23 encapsulation l2tpv3 pw-class R2R3
 no shutdown
