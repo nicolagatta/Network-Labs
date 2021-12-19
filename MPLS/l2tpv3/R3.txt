@@ -1,0 +1,25 @@
+# Configuring Provider network
+int e1/0
+ip address 10.0.23.3 255.255.255.0
+no shutdown
+
+int lo0 
+ip address 3.3.3.3 255.255.255.0
+
+router ospf 1 
+ network 3.3.3.0 0.0.0.255 area 0
+ network 10.0.23.0 0.0.0.255 area 0
+
+# NOw the l2tpv3 configuration:
+# Establish a secret 
+l2tp-class R3R2
+digest secret MyPass123 hash SHA1
+
+
+pseudowire-class R3R2
+ encapsulation l2tpv3
+ ip local interface Loopback0
+
+int e0/0
+xconnect 2.2.2.2 23 encapsulation l2tpv3 pw-class R3R2
+no shutdown
