@@ -39,20 +39,22 @@ In our case R1 (1.1.1.1) will be the passive therefore we'll have to filter the 
 >  deny tcp any any eq 646
 >
 >  permit ip any any (3 matches)
-
+>
 > int e0/0
+>
 > ip access-group PERMIT_LDP in
 
 ## R2
 > ip access-list extended PERMIT_LDP
+>
 >  permit tcp host 1.1.1.1 eq 646 host 1.1.1.1
-
+>
 >  deny tcp any eq 646 any
-
-
+>
 >  permit ip any any (3 matches)
-
+>
 > int e0/0
+>
 > ip access-group PERMIT_LDP in
 
 
@@ -68,6 +70,7 @@ Since there are two communications channel between routers (Discovery and sessio
 Configuration of timers:
 Hello timers:
 > mpls ldp discovery hello interval 10
+>
 > mpls ldp discovery hello holdtime 10
 
 Session Holdtime:
