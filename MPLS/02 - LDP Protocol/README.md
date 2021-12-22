@@ -10,9 +10,13 @@ OSPF is configured for all routers to have full reachability, including loopback
 On R1 we can setup MPLS using 
 
 > mpls ldp router-id lo0
+> 
 > mpls label range 1000 1999
+> 
 > mpls label protocol ldp
+> 
 > int e0/0
+> 
 > mpls ip
 
 As soon as we give the above comment, the router starts sending out multicast packets (Hello packets)
@@ -32,11 +36,17 @@ As soon as we give the above comment, the router starts sending out multicast pa
 If we configure also R2 with the commands (note the labels IDs in a different range):
 
 > mpls ldp router-id lo0
+> 
 > mpls label range 2000 2999
+> 
 > mpls label protocol ldp
+> 
 > int e0/0
+> 
 > mpls ip
+> 
 > int e0/1
+> 
 > mpls ip
 
 We see that R2 sends out an Hello packet and immediately R1 and R2 start communicating on port tcp 646
