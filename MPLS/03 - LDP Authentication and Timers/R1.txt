@@ -1,0 +1,28 @@
+int lo0 
+ip address 1.1.1.1 255.255.255.0
+
+int e0/0
+ip address 10.0.12.1 255.255.255.0
+mpls ip
+no shutdown
+
+router ospf 1 
+network 0.0.0.0 255.255.255.255 area 0
+
+mpls ldp router-id lo0
+mpls label range 1000 1999
+mpls label protocol ldp
+
+# Here we set the neighbor authentication
+mpls ldp neighbor 2.2.2.2 password mys3cretpa$$
+
+# Here we set the ACL for TCP session filtering
+
+ip access-list extended PERMIT_LDP
+  permit tcp host 2.2.2.2 host 1.1.1.1 eq 646
+  deny tcp any any eq 646
+  permit ip any any (3 matches)
+
+# Apply the filter to incoming traffic
+int e0/0
+ip access-group PERMIT_LDP in
