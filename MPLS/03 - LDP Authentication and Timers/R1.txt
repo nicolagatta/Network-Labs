@@ -21,7 +21,7 @@ mpls ldp neighbor 2.2.2.2 password mys3cretpa$$
 ip access-list extended PERMIT_LDP
   permit tcp host 2.2.2.2 host 1.1.1.1 eq 646
   deny tcp any any eq 646
-  permit ip any any (3 matches)
+  permit ip any any
 
 # Apply the filter to incoming traffic
 int e0/0
