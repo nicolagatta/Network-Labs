@@ -1,0 +1,36 @@
+#################################
+# R3 -  Basic Config with OSPF
+#################################
+
+int lo0 
+ip address 3.3.3.3 255.255.255.0
+
+int e0/0
+ip address 10.0.34.3 255.255.255.0
+no shutdown
+
+int e0/1
+ip address 10.0.23.3 255.255.255.0
+no shutdown
+
+
+router ospf 1 
+network 0.0.0.0 255.255.255.255 area 0
+
+################################
+# Now the  mpls configuration
+# Global settings as best practice: 
+# Setting loopback as source of update
+mpls ldp router-id lo0
+
+# setting a label range 
+mpls label range 3000 3999
+
+# setting LDP protocol (should be already by default)
+mpls label protocol ldp
+
+# Then activating mpls on the interfaces_
+int e0/0
+mpls ip
+int e0/1
+mpls ip
