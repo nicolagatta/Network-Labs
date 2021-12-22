@@ -82,6 +82,7 @@ The label for R3 lo0 are communicated upstream (R2 assigns and communicate its l
 
 This can be verifed on router R2 with the command:
 > show mpls forwarding table
+
 ![image](https://user-images.githubusercontent.com/17289045/147073972-655468ed-0e12-4e26-8d1c-d524a8d6f17c.png)
 
 
@@ -133,4 +134,30 @@ R3 will have the role of penultimape hop
 
 We can also configure R4 for MPLS and look also at the returning traffic for the ping packets
 
+# IGP synchronization
+We can ask to OSPF to help us:
+
+> router ospf 1 
+> mpls ldp autoconfig area 0
+
+With this command OSPF will enable MPLS on all the interfaces where OSPF is enabled and configured for area 0
+This will save us the command "mpls ip" on the interface.
+The area is optional: it helps to enable MPLS only on interfaces sitting in the area. If not used all OSPF interfaces are enabled for MPLS.
+
+
+# LDP details and Troubleshooting
+We can use some commands to show and troubleshoot what's happening with LDP:
+
+Show MPLS forward information table (i.e. advertised destinations with the local label, and the label received by the downstream router)
+> show mpls forwarding table
+
+Show neighbors (with all information related to session and discovery)
+> show mpls ldp neighbor 
+
+
+> show mpls label range
+
+
+Show interfaces configured for MPLS:
+> show mpls interfaces
 
