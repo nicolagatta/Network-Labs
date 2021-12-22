@@ -43,7 +43,10 @@ In our case R1 (1.1.1.1) will be the passive therefore we'll have to filter the 
 ## R2
 > ip access-list extended PERMIT_LDP
 >  permit tcp host 1.1.1.1 eq 646 host 1.1.1.1
+
 >  deny tcp any eq 646 any
+
+
 >  permit ip any any (3 matches)
 
 > int e0/0
