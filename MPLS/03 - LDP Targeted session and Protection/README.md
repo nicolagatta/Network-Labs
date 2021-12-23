@@ -9,7 +9,7 @@
 
 There are some situations where we need to establish an LDP session between non adjacent router:
 - AtoM (Any transport over MPLS)
-- MPLE TE Tunnel
+- MPLS TE Tunnel
 
 In such situations multicast hello packets can't be exchanged between the router and LDP session can't be established
 
