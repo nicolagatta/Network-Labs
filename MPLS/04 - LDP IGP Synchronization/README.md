@@ -2,7 +2,8 @@
 
 ## Topology
 
-![image](https://user-images.githubusercontent.com/17289045/147364963-22e693ae-5922-422c-966d-78666ca284bb.png)
+![image](https://user-images.githubusercontent.com/17289045/147365472-6240794b-6d00-49ca-8aa0-86f9af3f24ce.png)
+
 
 LDP - IGP synchronization can help in situations when IGP is fully sinchronized (i.e. everything is stable), but LDP is still no synchronized.
 This situation can generate black holes (i.e. routing with MPLS that is sending packets in the wrong path.
