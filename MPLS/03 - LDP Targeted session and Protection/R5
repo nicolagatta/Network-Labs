@@ -1,0 +1,20 @@
+int e0/2
+ip address 10.0.35.5 255.255.255.0
+no shutdown
+
+int e0/1
+ip address 10.0.45.5 255.255.255.0
+no shutdown
+
+int lo0
+ip address 5.5.5.5 255.255.255.0
+
+router ospf 1
+network 5.5.5.5 0.0.0.0 area 0
+network 10.0.35.5 0.0.0.0 area 0
+network 10.0.45.5 0.0.0.0 area 0
+mpls ldp autoconfig area 0
+
+mpls label range 5000 5999
+mpls label protocol ldp
+mpls ldp router-id lo0
